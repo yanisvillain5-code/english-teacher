@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Teacher AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="logo">
+        <span class="logo-icon">🎓</span>
+        <span class="logo-text">English<br><strong>Teacher AI</strong></span>
+      </div>
+      <p class="tagline">Your personal AI English tutor, available 24/7.</p>
+    </div>
+
+    <div class="sidebar-info">
+      <div class="level-badge" id="levelBadge">📊 Detecting your level…</div>
+
+      <div class="tips">
+        <p class="tips-title">💡 Tips</p>
+        <ul>
+          <li>Write freely — Alex will correct your mistakes.</li>
+          <li>Ask for explanations in French if needed.</li>
+          <li>Request exercises anytime!</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="model-info">
+        <span class="model-label">Model</span>
+        <span class="model-name" id="modelName">Loading…</span>
+      </div>
+      <button class="btn-new" onclick="newConversation()">+ New conversation</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CHAT -->
+  <main class="chat-area">
+
+    <header class="chat-header">
+      <div class="teacher-info">
+        <div class="avatar">A</div>
+        <div>
+          <p class="teacher-name">Alex</p>
+          <p class="teacher-status"><span class="status-dot"></span> Online</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="messages" id="messages">
+      <!-- Welcome message -->
+      <div class="message message-assistant">
+        <div class="message-avatar">A</div>
+        <div class="message-body">
+          <div class="message-bubble">
+            <p>Hello! I'm <strong>Alex</strong>, your personal English teacher. 👋</p>
+            <p>I'm here to help you improve your English — no matter your level. Feel free to write to me in English or French, and I'll gently correct any mistakes and explain why.</p>
+            <p><em>Ready to start? Just say hello! 😊</em></p>
+          </div>
+          <span class="message-time">Now</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-input-area">
+      <div class="input-wrapper">
+        <textarea
+          id="userInput"
+          placeholder="Write in English or French…"
+          rows="1"
+          maxlength="2000"
+          onkeydown="handleKeydown(event)"
+          oninput="autoResize(this)"
+        ></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/>
+          </svg>
+        </button>
+      </div>
+      <p class="input-hint">Press <kbd>Enter</kbd> to send · <kbd>Shift+Enter</kbd> for new line</p>
+    </div>
+
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

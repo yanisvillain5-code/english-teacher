@@ -2,88 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>English Teacher AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1f2a44" />
+  <title>English Teacher AI — Learn with Alex</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-top">
-      <div class="logo">
-        <span class="logo-icon">🎓</span>
-        <span class="logo-text">English<br><strong>Teacher AI</strong></span>
+<div class="app" id="app">
+
+  <!-- ═══════════ SIDEBAR ═══════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-text">
+          <strong>Alex</strong>
+          <span>English Teacher AI</span>
+        </div>
       </div>
-      <p class="tagline">Your personal AI English tutor, available 24/7.</p>
+      <button class="sidebar-close" id="sidebarClose" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
     </div>
 
-    <div class="sidebar-info">
-      <div class="level-badge" id="levelBadge">📊 Detecting your level…</div>
+    <button class="sidebar-new" id="newConvBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+      New conversation
+    </button>
 
-      <div class="tips">
-        <p class="tips-title">💡 Tips</p>
-        <ul>
-          <li>Write freely — Alex will correct your mistakes.</li>
-          <li>Ask for explanations in French if needed.</li>
-          <li>Request exercises anytime!</li>
-        </ul>
-      </div>
+    <p class="sidebar-section-label">History</p>
+    <div class="conversation-list" id="conversationList">
+      <!-- injected by JS -->
     </div>
 
-    <div class="sidebar-bottom">
-      <div class="model-info">
-        <span class="model-label">Model</span>
-        <span class="model-name" id="modelName">Loading…</span>
+    <div class="sidebar-footer">
+      <div class="streak-box">
+        <span class="streak-icon">🔥</span>
+        <div class="streak-text">
+          <div class="streak-num" id="streakNum">0 day streak</div>
+          <div class="streak-label" id="streakLabel">Practice today!</div>
+        </div>
       </div>
-      <button class="btn-new" onclick="newConversation()">+ New conversation</button>
+      <div class="theme-toggle-row">
+        <span>🌙 Dark mode</span>
+        <button class="theme-switch" id="themeSwitch" aria-label="Toggle dark mode"></button>
+      </div>
     </div>
   </aside>
 
-  <!-- MAIN CHAT -->
-  <main class="chat-area">
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
-    <header class="chat-header">
-      <div class="teacher-info">
-        <div class="avatar">A</div>
-        <div>
-          <p class="teacher-name">Alex</p>
-          <p class="teacher-status"><span class="status-dot"></span> Online</p>
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main class="main">
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+        <div class="teacher-info">
+          <div class="avatar">A</div>
+          <div class="teacher-text">
+            <p class="teacher-name">Alex</p>
+            <p class="teacher-status"><span class="status-dot"></span> Online · Ready to help</p>
+          </div>
         </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn essential" id="progressBtn" aria-label="View progress">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 16l4-4 3 3 5-6"/></svg>
+        </button>
       </div>
     </header>
 
-    <div class="messages" id="messages">
-      <!-- Welcome message -->
-      <div class="message message-assistant">
-        <div class="message-avatar">A</div>
-        <div class="message-body">
-          <div class="message-bubble">
-            <p>Hello! I'm <strong>Alex</strong>, your personal English teacher. 👋</p>
-            <p>I'm here to help you improve your English — no matter your level. Feel free to write to me in English or French, and I'll gently correct any mistakes and explain why.</p>
-            <p><em>Ready to start? Just say hello! 😊</em></p>
-          </div>
-          <span class="message-time">Now</span>
-        </div>
-      </div>
+    <div class="topics-bar" id="topicsBar">
+      <button class="topic-chip" data-topic="free">💬 Free chat</button>
+      <button class="topic-chip" data-topic="travel">✈️ Travel</button>
+      <button class="topic-chip" data-topic="business">💼 Business</button>
+      <button class="topic-chip" data-topic="interview">🎤 Job interview</button>
+      <button class="topic-chip" data-topic="restaurant">🍽️ Restaurant</button>
+      <button class="topic-chip" data-topic="smalltalk">☕ Small talk</button>
+      <button class="topic-chip" data-topic="grammar">📚 Grammar focus</button>
     </div>
 
-    <div class="chat-input-area">
-      <div class="input-wrapper">
+    <div class="messages" id="messages"></div>
+
+    <div class="input-area">
+      <div class="input-shell">
         <textarea
           id="userInput"
           placeholder="Write in English or French…"
           rows="1"
           maxlength="2000"
-          onkeydown="handleKeydown(event)"
-          oninput="autoResize(this)"
         ></textarea>
-        <button class="send-btn" id="sendBtn" onclick="sendMessage()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/>
-          </svg>
+        <button class="send-btn" id="sendBtn" aria-label="Send message">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
         </button>
       </div>
       <p class="input-hint">Press <kbd>Enter</kbd> to send · <kbd>Shift+Enter</kbd> for new line</p>
@@ -91,6 +107,54 @@
 
   </main>
 
-  <script src="/static/app.js"></script>
+  <!-- ═══════════ PROGRESS PANEL ═══════════ -->
+  <div class="progress-overlay" id="progressOverlay"></div>
+  <aside class="progress-panel" id="progressPanel">
+    <div class="progress-header">
+      <h2>Your progress</h2>
+      <button class="icon-btn" id="progressClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="progress-body">
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num" id="statMessages">0</div>
+          <div class="stat-label">Messages sent</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statCorrections">0</div>
+          <div class="stat-label">Corrections received</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statConversations">0</div>
+          <div class="stat-label">Conversations</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statStreak">0</div>
+          <div class="stat-label">Day streak</div>
+        </div>
+      </div>
+
+      <div>
+        <p class="progress-section-title">Estimated level</p>
+        <div class="level-bar-track"><div class="level-bar-fill" id="levelBarFill" style="width:5%"></div></div>
+        <p class="level-label" id="levelLabel">Beginner — keep practicing!</p>
+      </div>
+
+      <div>
+        <p class="progress-section-title">Recent corrections</p>
+        <div class="mistake-list" id="mistakeList">
+          <p class="mistake-empty">Your corrections will appear here as you chat with Alex.</p>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+
+</div>
+
+<script src="/static/app.js"></script>
 </body>
 </html>
